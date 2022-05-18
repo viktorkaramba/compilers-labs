@@ -57,8 +57,8 @@ DIGIT			[0-9]
 LOWERCASE_LETTER	[a-z]
 UPPERCASE_LETTER	[A-Z]
 NEWLINE			(\r\n|\n)+
-WHITESPACE		[ \t]*
-DASHCOMMENT		--.*\n
+WHITESPACE		[ \t\f\v\r]*
+DASHCOMMENT		--.*
 TYPEID			{UPPERCASE_LETTER}({LOWERCASE_LETTER}|{UPPERCASE_LETTER}|{DIGIT}|"_")*
 OBJECTID		{LOWERCASE_LETTER}({LOWERCASE_LETTER}|{UPPERCASE_LETTER}|{DIGIT}|"_")*
 INT_CONST		{DIGIT}+
@@ -91,7 +91,7 @@ NOT			(?i:not)
      BEGIN(COMMENT);	
      comment_depth++;	
 }
- <COMMENT>"(*" {
+<COMMENT>"(*" {
 	       comment_depth++;   	      
 }
 <COMMENT>"*)" {
@@ -104,12 +104,14 @@ NOT			(?i:not)
      cool_yylval.error_msg = "Unmatched *)";
      return ERROR;
 }
+<COMMENT>. {}
 <COMMENT>\n {
 	    curr_lineno++;    
 }
-<COMMENT>. {}
-{DASHCOMMENT} {
+{DASHCOMMENT}\n {
 	      curr_lineno++;
+}
+{DASHCOMMENT} {
 }
 <COMMENT><<EOF>> {
 		 BEGIN(INITIAL);
@@ -120,22 +122,26 @@ NOT			(?i:not)
    BEGIN(STRING);
    string_buf_ptr = string_buf;
 }
+
 <STRING>\" {
 	   BEGIN(INITIAL);
 	   if (strlen_check()) {
 	      return strlen_error();
 	   }
-	   string_buf_ptr = 0;
+	   *string_buf_ptr++ = '\0';
 	   cool_yylval.symbol = stringtable.add_string(string_buf);
 	   return STR_CONST;
 }
-<STRING><<EOF>> {
-		cool_yylval.error_msg = "EOF in string constant";
-		return ERROR;
-}
 
-<STRING>\\\n {
-	     curr_lineno++;
+<STRING>\\0 {
+	    if (strlen_check()) {
+	      return strlen_error();
+	    }
+	    *string_buf_ptr++ = '0';
+}
+<STRING>\0 {
+	    cool_yylval.error_msg = "String contains null character";
+	    return ERROR;
 }
 <STRING>\n {
 	   curr_lineno++;
@@ -143,17 +149,20 @@ NOT			(?i:not)
 	   cool_yylval.error_msg = "Unterminated string constant";
 	   return ERROR;
 }
-<STRING>\\0 {
-	   cool_yylval.error_msg = "String contains null character";
-	   *string_buf_ptr++ = '0';
-	   return ERROR;
+
+<STRING><<EOF>> {
+		BEGIN(INITIAL);
+		cool_yylval.error_msg = "EOF in string constant";
+		return ERROR;
 }
+
 <STRING>\\[^btnf] {
 		  if (strlen_check()) {
 	      	     return strlen_error();
 	  	  }
 		  *string_buf_ptr++ = yytext[1];
 }
+
 <STRING>\\b {
 	    if (strlen_check()) {
 	      return strlen_error();
@@ -183,6 +192,13 @@ NOT			(?i:not)
 	      return strlen_error();
 	  }
 	  *string_buf_ptr++ = *yytext;
+}
+<STRING>\[\][\n] {
+	   if (strlen_check()) {
+	      return strlen_error();
+	   }
+	   *string_buf_ptr++ = '\n';
+	   curr_lineno++;  
 }
 {INT_CONST} {
 	cool_yylval.symbol = inttable.add_string(yytext);
@@ -249,7 +265,7 @@ NOT			(?i:not)
    curr_lineno++;
 }
 . {
-  cool_yylval.error_msg = strdup(yytext);
+  cool_yylval.error_msg = yytext;
   return ERROR;
 }
  /*
