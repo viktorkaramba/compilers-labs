@@ -62,7 +62,9 @@ DASHCOMMENT		--.*\n
 TYPEID			{UPPERCASE_LETTER}({LOWERCASE_LETTER}|{UPPERCASE_LETTER}|{DIGIT}|"_")*
 OBJECTID		{LOWERCASE_LETTER}({LOWERCASE_LETTER}|{UPPERCASE_LETTER}|{DIGIT}|"_")*
 INT_CONST		{DIGIT}+
-BOOL_CONST		true|false
+TRUE			[t][rR][uU][eE]
+FALSE			[f][aA][lL][sS][eE]
+BOOL_CONST		{TRUE}|{FALSE}
 DARROW			=>
 LE			<=
 ASSIGN			<-
@@ -89,7 +91,7 @@ NOT			(?i:not)
      BEGIN(COMMENT);	
      comment_depth++;	
 }
-<COMMENT>"(*" {
+ <COMMENT>"(*" {
 	       comment_depth++;   	      
 }
 <COMMENT>"*)" {
@@ -141,8 +143,9 @@ NOT			(?i:not)
 	   cool_yylval.error_msg = "Unterminated string constant";
 	   return ERROR;
 }
-<STRING>\0 {
+<STRING>\\0 {
 	   cool_yylval.error_msg = "String contains null character";
+	   *string_buf_ptr++ = '0';
 	   return ERROR;
 }
 <STRING>\\[^btnf] {
@@ -187,7 +190,7 @@ NOT			(?i:not)
 }
 
 {BOOL_CONST} {
-	if (strcmp(yytext, "true") == 0) {
+	if (yytext[0]=='t') {
 		 cool_yylval.boolean = true;
 	}
 	else {
