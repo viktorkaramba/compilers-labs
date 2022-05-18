@@ -56,7 +56,6 @@ int strlen_error();
 DIGIT			[0-9]
 LOWERCASE_LETTER	[a-z]
 UPPERCASE_LETTER	[A-Z]
-NEWLINE			(\r\n|\n)+
 WHITESPACE		[ \t\f\v\r]*
 DASHCOMMENT		--.*
 TYPEID			{UPPERCASE_LETTER}({LOWERCASE_LETTER}|{UPPERCASE_LETTER}|{DIGIT}|"_")*
@@ -133,15 +132,12 @@ NOT			(?i:not)
 	   return STR_CONST;
 }
 
+
 <STRING>\\0 {
-	    if (strlen_check()) {
+	   if (strlen_check()) {
 	      return strlen_error();
-	    }
-	    *string_buf_ptr++ = '0';
-}
-<STRING>\0 {
-	    cool_yylval.error_msg = "String contains null character";
-	    return ERROR;
+	   }
+	   *string_buf_ptr++ = '0';
 }
 <STRING>\n {
 	   curr_lineno++;
