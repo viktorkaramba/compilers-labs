@@ -49,6 +49,7 @@ int strlen_error();
 
 %x COMMENT
 %x STRING
+%x INVALID_STRING
 /*
  * Define names for regular expressions here.
  */
@@ -121,7 +122,6 @@ NOT			(?i:not)
    BEGIN(STRING);
    string_buf_ptr = string_buf;
 }
-
 <STRING>\" {
 	   BEGIN(INITIAL);
 	   if (strlen_check()) {
@@ -131,13 +131,10 @@ NOT			(?i:not)
 	   cool_yylval.symbol = stringtable.add_string(string_buf);
 	   return STR_CONST;
 }
-
-
-<STRING>\\0 {
-	   if (strlen_check()) {
-	      return strlen_error();
-	   }
-	   *string_buf_ptr++ = '0';
+<STRING>.\0  {
+	BEGIN(INVALID_STRING);
+	cool_yylval.error_msg = "String contains escaped null character.";
+	return ERROR;
 }
 <STRING>\n {
 	   curr_lineno++;
@@ -151,7 +148,6 @@ NOT			(?i:not)
 		cool_yylval.error_msg = "EOF in string constant";
 		return ERROR;
 }
-
 <STRING>\\[^btnf] {
 		  if (strlen_check()) {
 	      	     return strlen_error();
@@ -183,6 +179,7 @@ NOT			(?i:not)
 	    }
 	    *string_buf_ptr++ = '\f';
 }
+
 <STRING>. {
 	  if (strlen_check()) {
 	      return strlen_error();
@@ -195,6 +192,21 @@ NOT			(?i:not)
 	   }
 	   *string_buf_ptr++ = '\n';
 	   curr_lineno++;  
+}
+
+<INVALID_STRING>\" {
+	BEGIN(INITIAL);
+}
+<INVALID_STRING>\n {
+	curr_lineno++;
+	BEGIN(INITIAL);
+}
+<INVALID_STRING>\[\][\n] {
+	curr_lineno++;
+}
+<INVALID_STRING>\\. {
+}
+<INVALID_STRING>. {
 }
 {INT_CONST} {
 	cool_yylval.symbol = inttable.add_string(yytext);
