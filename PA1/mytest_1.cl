@@ -3,4 +3,8 @@
 <=
 =>
 (*(*good*)*)
+True; tRue; tRUE;
+faLSE; FALSE; fAlSe;
 (*(*not good*)
+
+ 
