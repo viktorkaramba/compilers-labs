@@ -296,7 +296,7 @@ bool strlen_check () {
 }
 
 int strlen_error() {
-    BEGIN(INITIAL);
+    BEGIN(INVALID_STRING);
     cool_yylval.error_msg = "String constant too long";
     return ERROR;
 }
