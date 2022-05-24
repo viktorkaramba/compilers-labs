@@ -5,5 +5,5 @@ abcd "
 abcd" 
 
 "q\bw\\ner\t\\0"
-
+(*comment*)*)
 -- dashcomment
