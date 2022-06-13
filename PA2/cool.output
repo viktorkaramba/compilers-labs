@@ -735,8 +735,8 @@ state 50
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 13 (feature)
 
@@ -783,8 +783,8 @@ state 54
     '-'   shift, and go to state 74
     '*'   shift, and go to state 75
     '/'   shift, and go to state 76
-    '.'   shift, and go to state 77
-    '@'   shift, and go to state 78
+    '@'   shift, and go to state 77
+    '.'   shift, and go to state 78
 
 
 state 55
@@ -835,8 +835,8 @@ state 58
     '-'   shift, and go to state 74
     '*'   shift, and go to state 75
     '/'   shift, and go to state 76
-    '.'   shift, and go to state 77
-    '@'   shift, and go to state 78
+    '@'   shift, and go to state 77
+    '.'   shift, and go to state 78
 
 
 state 59
@@ -860,8 +860,8 @@ state 59
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
 
 state 60
@@ -884,8 +884,8 @@ state 61
    51    | exp . LE exp
    52    | exp . '=' exp
 
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 44 (exp)
 
@@ -959,8 +959,8 @@ state 64
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 53 (exp)
 
@@ -977,6 +977,9 @@ state 65
    50    | exp . '<' exp
    51    | exp . LE exp
    52    | exp . '=' exp
+
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 49 (exp)
 
@@ -1032,8 +1035,8 @@ state 68
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
     ';'  shift, and go to state 92
 
 
@@ -1057,8 +1060,8 @@ state 69
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
     ')'  shift, and go to state 93
 
 
@@ -1218,16 +1221,16 @@ state 76
 
 state 77
 
-   37 exp: exp '.' . OBJECTID '(' exp_parameter ')'
+   35 exp: exp '@' . TYPEID '.' OBJECTID '(' exp_parameter ')'
 
-    OBJECTID  shift, and go to state 101
+    TYPEID  shift, and go to state 101
 
 
 state 78
 
-   35 exp: exp '@' . TYPEID '.' OBJECTID '(' exp_parameter ')'
+   37 exp: exp '.' . OBJECTID '(' exp_parameter ')'
 
-    TYPEID  shift, and go to state 102
+    OBJECTID  shift, and go to state 102
 
 
 state 79
@@ -1331,8 +1334,8 @@ state 85
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 34 (exp)
 
@@ -1373,8 +1376,8 @@ state 88
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 25 (exp_parameter)
 
@@ -1413,8 +1416,8 @@ state 91
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
     ';'  shift, and go to state 113
 
 
@@ -1449,8 +1452,8 @@ state 94
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     LE   error (nonassociative)
     '<'  error (nonassociative)
@@ -1476,8 +1479,8 @@ state 95
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     LE   error (nonassociative)
     '<'  error (nonassociative)
@@ -1503,8 +1506,8 @@ state 96
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     LE   error (nonassociative)
     '<'  error (nonassociative)
@@ -1528,8 +1531,8 @@ state 97
 
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 45 (exp)
 
@@ -1549,8 +1552,8 @@ state 98
 
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 46 (exp)
 
@@ -1568,8 +1571,8 @@ state 99
    51    | exp . LE exp
    52    | exp . '=' exp
 
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 47 (exp)
 
@@ -1587,24 +1590,24 @@ state 100
    51    | exp . LE exp
    52    | exp . '=' exp
 
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 48 (exp)
 
 
 state 101
 
-   37 exp: exp '.' OBJECTID . '(' exp_parameter ')'
+   35 exp: exp '@' TYPEID . '.' OBJECTID '(' exp_parameter ')'
 
-    '('  shift, and go to state 114
+    '.'  shift, and go to state 114
 
 
 state 102
 
-   35 exp: exp '@' TYPEID . '.' OBJECTID '(' exp_parameter ')'
+   37 exp: exp '.' OBJECTID . '(' exp_parameter ')'
 
-    '.'  shift, and go to state 115
+    '('  shift, and go to state 115
 
 
 state 103
@@ -1650,8 +1653,8 @@ state 104
     '-'   shift, and go to state 74
     '*'   shift, and go to state 75
     '/'   shift, and go to state 76
-    '.'   shift, and go to state 77
-    '@'   shift, and go to state 78
+    '@'   shift, and go to state 77
+    '.'   shift, and go to state 78
 
 
 state 105
@@ -1687,8 +1690,8 @@ state 106
     '-'   shift, and go to state 74
     '*'   shift, and go to state 75
     '/'   shift, and go to state 76
-    '.'   shift, and go to state 77
-    '@'   shift, and go to state 78
+    '@'   shift, and go to state 77
+    '.'   shift, and go to state 78
 
 
 state 107
@@ -1761,6 +1764,13 @@ state 113
 
 state 114
 
+   35 exp: exp '@' TYPEID '.' . OBJECTID '(' exp_parameter ')'
+
+    OBJECTID  shift, and go to state 126
+
+
+state 115
+
    37 exp: exp '.' OBJECTID '(' . exp_parameter ')'
 
     error       shift, and go to state 86
@@ -1782,15 +1792,8 @@ state 114
     ')'  reduce using rule 27 (exp_parameter)
     ','  reduce using rule 27 (exp_parameter)
 
-    exp_parameter  go to state 126
+    exp_parameter  go to state 127
     exp            go to state 88
-
-
-state 115
-
-   35 exp: exp '@' TYPEID '.' . OBJECTID '(' exp_parameter ')'
-
-    OBJECTID  shift, and go to state 127
 
 
 state 116
@@ -1813,8 +1816,8 @@ state 116
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
     '}'  shift, and go to state 128
 
 
@@ -1943,26 +1946,26 @@ state 125
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     $default  reduce using rule 26 (exp_parameter)
 
 
 state 126
 
-   26 exp_parameter: exp_parameter . ',' exp
-   37 exp: exp '.' OBJECTID '(' exp_parameter . ')'
+   35 exp: exp '@' TYPEID '.' OBJECTID . '(' exp_parameter ')'
 
-    ')'  shift, and go to state 134
-    ','  shift, and go to state 112
+    '('  shift, and go to state 134
 
 
 state 127
 
-   35 exp: exp '@' TYPEID '.' OBJECTID . '(' exp_parameter ')'
+   26 exp_parameter: exp_parameter . ',' exp
+   37 exp: exp '.' OBJECTID '(' exp_parameter . ')'
 
-    '('  shift, and go to state 135
+    ')'  shift, and go to state 135
+    ','  shift, and go to state 112
 
 
 state 128
@@ -1993,8 +1996,8 @@ state 129
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
 
 state 130
@@ -2017,8 +2020,8 @@ state 130
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     LE        [reduce using rule 29 (exp_let)]
     '<'       [reduce using rule 29 (exp_let)]
@@ -2027,8 +2030,8 @@ state 130
     '-'       [reduce using rule 29 (exp_let)]
     '*'       [reduce using rule 29 (exp_let)]
     '/'       [reduce using rule 29 (exp_let)]
-    '.'       [reduce using rule 29 (exp_let)]
     '@'       [reduce using rule 29 (exp_let)]
+    '.'       [reduce using rule 29 (exp_let)]
     $default  reduce using rule 29 (exp_let)
 
 
@@ -2054,8 +2057,8 @@ state 131
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
     ','  shift, and go to state 138
 
 
@@ -2074,13 +2077,6 @@ state 133
 
 
 state 134
-
-   37 exp: exp '.' OBJECTID '(' exp_parameter ')' .
-
-    $default  reduce using rule 37 (exp)
-
-
-state 135
 
    35 exp: exp '@' TYPEID '.' OBJECTID '(' . exp_parameter ')'
 
@@ -2105,6 +2101,13 @@ state 135
 
     exp_parameter  go to state 140
     exp            go to state 88
+
+
+state 135
+
+   37 exp: exp '.' OBJECTID '(' exp_parameter ')' .
+
+    $default  reduce using rule 37 (exp)
 
 
 state 136
@@ -2197,8 +2200,8 @@ state 141
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
 
     LE        [reduce using rule 30 (exp_let)]
     '<'       [reduce using rule 30 (exp_let)]
@@ -2207,8 +2210,8 @@ state 141
     '-'       [reduce using rule 30 (exp_let)]
     '*'       [reduce using rule 30 (exp_let)]
     '/'       [reduce using rule 30 (exp_let)]
-    '.'       [reduce using rule 30 (exp_let)]
     '@'       [reduce using rule 30 (exp_let)]
+    '.'       [reduce using rule 30 (exp_let)]
     $default  reduce using rule 30 (exp_let)
 
 
@@ -2239,8 +2242,8 @@ state 143
     '-'  shift, and go to state 74
     '*'  shift, and go to state 75
     '/'  shift, and go to state 76
-    '.'  shift, and go to state 77
-    '@'  shift, and go to state 78
+    '@'  shift, and go to state 77
+    '.'  shift, and go to state 78
     ';'  shift, and go to state 145
 
 
